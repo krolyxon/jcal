@@ -1,5 +1,4 @@
 /* Todo
-* - Fix Substraction errors
 * - Add support for trigonometric functions
 * - Remove all edge cases
 */
@@ -17,6 +16,7 @@ public class Parser {
 
     public static boolean isOperand(char c) {
         switch (c) {
+            case '0':
             case '1':
             case '2':
             case '3':
@@ -115,7 +115,7 @@ public class Parser {
             case '+':
                 return op2 + op1;
             case '-':
-                return op2 - op1;
+                return op1 - op2;
             case '*':
                 return op2 * op1;
             case '/':
