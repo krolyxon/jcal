@@ -1,4 +1,6 @@
 /* Todo
+* - Fix this:
+* when expression = 5+10*(10), it misses +
 * - Add support for trigonometric functions
 * - Remove all edge cases
 */
@@ -70,6 +72,9 @@ public class Parser {
         // Main Expression Iteration
         for (int i = 0; i < infix.length; i++) {
             char c = infix[i];
+
+            // Keep appending digits to the operand StringBuilder and skip iterations till
+            // we find a operator.
             if (isOperand(c)) {
                 operand.append(infix[i]);
                 if (i < infix.length - 1) {
@@ -90,14 +95,22 @@ public class Parser {
                 }
                 operatorStack.pop();
             } else {
+                // Manage precedence order of operatorStack operators
                 while (!operatorStack.isEmpty() && getPresedence(c) <= getPresedence((char) operatorStack.peek())
                         && hasLeftAssociativity(c)) {
                     output.add(operatorStack.pop().toString());
                 }
-                operatorStack.push(c);
+
+                // For whatever reason, the last digit gets added to the operatorStack, leading
+                // to a duplicate of last digit in the expression
+                // To fix this, we again make sure that the current char is not a operand.
+                if (!isOperand(c)) {
+                    operatorStack.push(c);
+                }
             }
         }
 
+        // pop all the operators left in the operatorStack after the loop is done.
         while (!operatorStack.isEmpty()) {
             if (operatorStack.peek() == '(') {
                 return "This expression is invalid";
@@ -105,9 +118,7 @@ public class Parser {
             output.add(operatorStack.pop().toString());
         }
 
-        // last digit gets duplicate entry for some reason, so have to remove it.
-        String op = output.toString();
-        return op.substring(0, op.length() -2);
+        return output.toString();
     }
 
     private Double evaluate(String operator, Double op1, Double op2) {
