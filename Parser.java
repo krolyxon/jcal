@@ -1,6 +1,4 @@
 /* Todo
-* - Fix this:
-* when expression = 5+10*(10), it misses +
 * - Add support for trigonometric functions
 * - Remove all edge cases
 */
