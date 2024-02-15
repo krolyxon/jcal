@@ -8,13 +8,15 @@ import java.util.StringJoiner;
 
 public class Parser {
     private String expr;
+    private String postfix;
     private Stack<Character> operatorStack;
 
     public Parser(String infixExpr) {
         expr = infixExpr.trim().replaceAll("\\s", ""); // remove whitespaces
+        postfix = toPostFix();
     }
 
-    public static boolean isOperand(char c) {
+    private boolean isOperand(char c) {
         switch (c) {
             case '0':
             case '1':
@@ -32,11 +34,11 @@ public class Parser {
         }
     }
 
-    public static boolean isOperand(String c) {
+    private boolean isOperand(String c) {
         return isOperand(c.charAt(0));
     }
 
-    public int getPresedence(char c) {
+    private int getPresedence(char c) {
         switch (c) {
             case '^':
                 return 3;
@@ -53,7 +55,7 @@ public class Parser {
         }
     }
 
-    public boolean hasLeftAssociativity(char c) {
+    private boolean hasLeftAssociativity(char c) {
         if (c == '^') {
             return false;
         } else {
@@ -61,7 +63,7 @@ public class Parser {
         }
     }
 
-    public String toPostFix() {
+    private String toPostFix() {
         operatorStack = new Stack<>();
         StringJoiner output = new StringJoiner(" ");
         StringBuilder operand = new StringBuilder();
@@ -136,7 +138,7 @@ public class Parser {
         }
     }
 
-    public double evalExpr(String postfix) {
+    public double eval() {
         Stack<Double> stack = new Stack<Double>();
         for (String c : postfix.split(" ")) {
             if (isOperand(c)) {
@@ -148,5 +150,9 @@ public class Parser {
             }
         }
         return stack.pop();
+    }
+
+    public String getPostfix() {
+            return postfix;
     }
 }
