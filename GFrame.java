@@ -1,3 +1,10 @@
+/*
+* TODO:
+* Item positions are hard coded, make them dynamic
+* so that window can be set to resizable.
+*/
+
+
 import java.util.Vector;
 import javax.swing.*;
 import java.awt.Color;
@@ -57,7 +64,8 @@ public class GFrame extends JFrame {
         JButton bSub = newButton("-", 250, 250, 100, 40);
         JButton bMul = newButton("X", 250, 200, 100, 40);
         JButton bDiv = newButton("%", 250, 150, 100, 40);
-        JButton bCut = newButton("<x", 180, 300, 60, 40);
+        JButton bCut = newButton("", 180, 300, 60, 40);
+        bCut.setFont(new Font("JetBrainsMono Nerd Font", Font.PLAIN, 20 ));
         JButton bRightPar = newButton(")", 110, 100, 60, 40);
         JButton bLeftPar = newButton("(", 40, 100, 60, 40);
         JButton bDoubleZero = newButton("00", 40, 300, 60, 40);
