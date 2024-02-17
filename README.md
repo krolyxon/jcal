@@ -1,4 +1,4 @@
-# ['JavaCalc'](https://github.com/krolyxon/cht-rs)
+# [JavaCalc](https://github.com/krolyxon/cht-rs)
 - Simple calculator i made in java to learn expression parsing and Swing UI development.
 Simple GUI calculator with complex infix expression evaluation made in Java using Swing.
 
@@ -11,7 +11,7 @@ Simple GUI calculator with complex infix expression evaluation made in Java usin
   ```
 
 ## JavaCalc in action
-![](https://raw.githubusercontent.com/krolyxon/JavaCalc/master/asset/screenshot1.png)
+![](https://raw.githubusercontent.com/krolyxon/JavaCalc/masters/asset/screenshot1.png)
 
 ## License
 This project is licensed under the [`GPLv3 LICENSE`](https://github.com/krolyxon/JavaCalc/blob/master/LICENSE)
