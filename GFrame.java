@@ -93,7 +93,7 @@ public class GFrame extends JFrame {
         JButton bClear = newButton("CL", 180, 100, 60, 40);
         JButton bAdd = newButton("+", 250, 300, 100, 40);
         JButton bSub = newButton("-", 250, 250, 100, 40);
-        JButton bMul = newButton("X", 250, 200, 100, 40);
+        JButton bMul = newButton("x", 250, 200, 100, 40);
         JButton bDiv = newButton("%", 250, 150, 100, 40);
         JButton bCut = newButton("", 180, 300, 60, 40);
         bCut.setFont(new Font("JetBrainsMono Nerd Font", Font.PLAIN, 20));
@@ -158,7 +158,6 @@ public class GFrame extends JFrame {
                     Vector<String> s = history.getHistory();
                     s.add(expression + " = " + formattedResult);
                     for (int i = 0; i < s.size(); i++) {
-                        System.out.println(s.get(i));
                         // tHist.setText(new String(s.get(i).concat(tHist.getText())).concat("\n"));
                         tHist.append(s.get(i));
                         tHist.append("\n");
