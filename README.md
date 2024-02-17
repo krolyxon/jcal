@@ -11,7 +11,7 @@ Simple GUI calculator with complex infix expression evaluation made in Java usin
   ```
 
 ## JavaCalc in action
-![](https://raw.githubusercontent.com/krolyxon/JavaCalc/masters/asset/screenshot1.png)
+![](https://raw.githubusercontent.com/krolyxon/JavaCalc/master/assets/screenshot1.png)
 
 ## License
 This project is licensed under the [`GPLv3 LICENSE`](https://github.com/krolyxon/JavaCalc/blob/master/LICENSE)
