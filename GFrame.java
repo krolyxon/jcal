@@ -4,7 +4,6 @@
 * so that window can be set to resizable.
 */
 
-
 import java.util.Vector;
 import javax.swing.*;
 import java.awt.Color;
@@ -12,6 +11,30 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.*;
+import java.awt.*;
+import javax.swing.border.Border;
+import java.text.DecimalFormat;
+
+class RoundBtn implements Border {
+    private int r;
+
+    RoundBtn(int r) {
+        this.r = r;
+    }
+
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.r + 1, this.r + 1, this.r + 2, this.r);
+    }
+
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+    public void paintBorder(Component c, Graphics g, int x, int y,
+            int width, int height) {
+        g.drawRoundRect(x, y, width - 1, height - 1, r, r);
+    }
+}
 
 public class GFrame extends JFrame {
     Parser p;
@@ -24,6 +47,7 @@ public class GFrame extends JFrame {
         b.setForeground(Color.decode("#e5e5e5"));
         b.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
         b.setBounds(d1, d2, d3, d4);
+        b.setBorder(new RoundBtn(15));
         b.setText(text);
         return b;
     }
@@ -38,7 +62,6 @@ public class GFrame extends JFrame {
     }
 
     GFrame(String title) {
-        History history = new History();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle(title);
         this.getContentPane().setBackground(Color.decode("#111111"));
@@ -51,11 +74,19 @@ public class GFrame extends JFrame {
         tf.setMargin(new Insets(0, 10, 0, 10));
         tf.setBounds(40, 50, 310, 40);
         tf.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
+        tf.setBorder(new RoundBtn(5));
 
         // History Text Field
-        JTextField tHist = new JTextField();
-        tHist.setBounds(100, 10, 310, 40);
+        History history = new History();
+        JTextArea tHist = new JTextArea();
+        tHist.setBounds(380, 50, 200, 290);
         tHist.setEditable(false);
+        tHist.setBorder(new RoundBtn(5));
+        tHist.setBackground(Color.decode("#2B2B2B"));
+        tHist.setForeground(Color.decode("#e5e5e5"));
+        tHist.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
+        tHist.setBorder(new RoundBtn(5));
+        tHist.setMargin(new Insets(0, 10, 0, 10));
 
         // Buttons
         JButton bEval = newButton("=", 250, 100, 100, 40);
@@ -65,7 +96,7 @@ public class GFrame extends JFrame {
         JButton bMul = newButton("X", 250, 200, 100, 40);
         JButton bDiv = newButton("%", 250, 150, 100, 40);
         JButton bCut = newButton("", 180, 300, 60, 40);
-        bCut.setFont(new Font("JetBrainsMono Nerd Font", Font.PLAIN, 20 ));
+        bCut.setFont(new Font("JetBrainsMono Nerd Font", Font.PLAIN, 20));
         JButton bRightPar = newButton(")", 110, 100, 60, 40);
         JButton bLeftPar = newButton("(", 40, 100, 60, 40);
         JButton bDoubleZero = newButton("00", 40, 300, 60, 40);
@@ -102,8 +133,8 @@ public class GFrame extends JFrame {
         this.add(bEight);
         this.add(bNine);
         this.add(tf);
-        // this.add(tHist);
-        this.setSize(400, 400);
+        this.add(tHist);
+        this.setSize(600, 400);
         this.setLayout(null);
         this.setVisible(true);
 
@@ -117,17 +148,20 @@ public class GFrame extends JFrame {
         bEval.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (tf.getText().length() != 0) {
+                    String expression = tf.getText();
+                    DecimalFormat format = new DecimalFormat();
                     p = new Parser(tf.getText());
-                    tf.setText(Double.toString(p.eval()));
-
-                    // Save to history
-                    history.addHistory(tf.getText());
+                    String formattedResult = format.format(p.eval());
+                    tf.setText(formattedResult);
 
                     tHist.setText("");
                     Vector<String> s = history.getHistory();
+                    s.add(expression + " = " + formattedResult);
                     for (int i = 0; i < s.size(); i++) {
                         System.out.println(s.get(i));
-                        tHist.setText(new String(s.get(i).concat(tHist.getText())).concat("\n"));
+                        // tHist.setText(new String(s.get(i).concat(tHist.getText())).concat("\n"));
+                        tHist.append(s.get(i));
+                        tHist.append("\n");
                     }
 
                 } else {

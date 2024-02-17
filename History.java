@@ -7,9 +7,6 @@ public class History {
         hist = new Vector<String>();
     }
 
-    public void addHistory(String h) {
-        hist.add(h);
-    }
     public Vector<String> getHistory() {
         return hist;
     }
