@@ -72,7 +72,7 @@ public class GFrame extends JFrame {
         tf.setBackground(Color.decode("#2B2B2B"));
         tf.setForeground(Color.decode("#e5e5e5"));
         tf.setMargin(new Insets(0, 10, 0, 10));
-        tf.setBounds(40, 50, 310, 40);
+        tf.setBounds(40, 50, 240, 40);
         tf.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
         tf.setBorder(new RoundBtn(5));
 
@@ -89,7 +89,8 @@ public class GFrame extends JFrame {
         tHist.setMargin(new Insets(0, 10, 0, 10));
 
         // Buttons
-        JButton bEval = newButton("=", 250, 100, 100, 40);
+        JButton bEval= newButton("=", 290, 50, 60, 40);
+        JButton bExp= newButton("^", 250, 100, 100, 40);
         JButton bClear = newButton("CL", 180, 100, 60, 40);
         JButton bClearHistory = newButton("Clear History", 380, 300, 200, 40);
         JButton bAdd = newButton("+", 250, 300, 100, 40);
@@ -113,6 +114,7 @@ public class GFrame extends JFrame {
         JButton bNine = newButton("9", 180, 150, 60, 40);
 
         // Add the buttons to the Frame
+        this.add(bExp);
         this.add(bEval);
         this.add(bClear);
         this.add(bClearHistory);
@@ -172,6 +174,7 @@ public class GFrame extends JFrame {
         });
 
         // Common actions that just appends the symbols to the text field
+        actionAdderForTextField(bExp, "^");
         actionAdderForTextField(bAdd, "+");
         actionAdderForTextField(bSub, "-");
         actionAdderForTextField(bMul, "*");

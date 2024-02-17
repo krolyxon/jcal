@@ -132,7 +132,7 @@ public class Parser {
             case '/':
                 return op1 / op2;
             case '^':
-                return (Math.pow(op2, op1));
+                return (Math.pow(op1, op2));
             default:
                 return 0.0;
         }
