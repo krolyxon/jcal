@@ -7,6 +7,10 @@ public class History {
         hist = new Vector<String>();
     }
 
+    public void clearHistory() {
+            hist.clear();
+    }
+
     public Vector<String> getHistory() {
         return hist;
     }

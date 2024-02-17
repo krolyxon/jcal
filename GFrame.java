@@ -79,7 +79,7 @@ public class GFrame extends JFrame {
         // History Text Field
         History history = new History();
         JTextArea tHist = new JTextArea();
-        tHist.setBounds(380, 50, 200, 290);
+        tHist.setBounds(380, 50, 200, 240);
         tHist.setEditable(false);
         tHist.setBorder(new RoundBtn(5));
         tHist.setBackground(Color.decode("#2B2B2B"));
@@ -91,6 +91,7 @@ public class GFrame extends JFrame {
         // Buttons
         JButton bEval = newButton("=", 250, 100, 100, 40);
         JButton bClear = newButton("CL", 180, 100, 60, 40);
+        JButton bClearHistory = newButton("Clear History", 380, 300, 200, 40);
         JButton bAdd = newButton("+", 250, 300, 100, 40);
         JButton bSub = newButton("-", 250, 250, 100, 40);
         JButton bMul = newButton("x", 250, 200, 100, 40);
@@ -114,6 +115,7 @@ public class GFrame extends JFrame {
         // Add the buttons to the Frame
         this.add(bEval);
         this.add(bClear);
+        this.add(bClearHistory);
         this.add(bAdd);
         this.add(bSub);
         this.add(bMul);
@@ -191,6 +193,13 @@ public class GFrame extends JFrame {
         bClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 tf.setText("");
+            }
+        });
+
+        bClearHistory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                history.clearHistory();
+                tHist.setText("");
             }
         });
 
