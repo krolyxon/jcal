@@ -1,4 +1,4 @@
-# [JavaCalc](https://github.com/krolyxon/cht-rs)
+# [JavaCalc](https://github.com/krolyxon/JavaCalc)
 Simple GUI calculator with complex infix expression evaluation made in Java using Swing.
 
 ## Installation
