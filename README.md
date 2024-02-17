@@ -1,5 +1,4 @@
 # [JavaCalc](https://github.com/krolyxon/cht-rs)
-- Simple calculator i made in java to learn expression parsing and Swing UI development.
 Simple GUI calculator with complex infix expression evaluation made in Java using Swing.
 
 ## Installation
