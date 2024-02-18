@@ -18,6 +18,7 @@ public class Parser {
 
     private boolean isOperand(char c) {
         switch (c) {
+            case '.':
             case '0':
             case '1':
             case '2':
