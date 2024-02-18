@@ -7,6 +7,7 @@ Simple GUI calculator with complex infix expression evaluation made in Java usin
   $ git clone --depth=1 https://github.com/krolyxon/JavaCalc --branch=master
   $ cd JavaCalc
   $ ./install.sh
+  $ jcal
   ```
 or go to latest [releases](https://github.com/krolyxon/JavaCalc/releases) and get the .jar file.
 
