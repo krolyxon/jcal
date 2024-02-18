@@ -14,6 +14,7 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.border.Border;
 import java.text.DecimalFormat;
+import java.lang.StringBuilder;
 
 class RoundBtn implements Border {
     private int r;
@@ -76,21 +77,19 @@ public class GFrame extends JFrame {
         tf.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
         tf.setBorder(new RoundBtn(5));
 
-        // History Text Field
-        History history = new History();
-        JTextArea tHist = new JTextArea();
-        tHist.setBounds(380, 50, 200, 240);
-        tHist.setEditable(false);
-        tHist.setBorder(new RoundBtn(5));
-        tHist.setBackground(Color.decode("#2B2B2B"));
-        tHist.setForeground(Color.decode("#e5e5e5"));
-        tHist.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
-        tHist.setBorder(new RoundBtn(5));
-        tHist.setMargin(new Insets(0, 10, 0, 10));
+        // History
+        DefaultListModel<String> histList = new DefaultListModel<>();
+        JList<String> lHist = new JList<>(histList);
+        lHist.setBackground(Color.decode("#2B2B2B"));
+        lHist.setForeground(Color.decode("#e5e5e5"));
+        lHist.setBounds(380, 50, 200, 240);
+        lHist.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        lHist.setBorder(new RoundBtn(5));
+        this.add(lHist);
 
         // Buttons
-        JButton bEval= newButton("=", 290, 50, 60, 40);
-        JButton bExp= newButton("^", 250, 100, 100, 40);
+        JButton bEval = newButton("=", 290, 50, 60, 40);
+        JButton bExp = newButton("^", 250, 100, 100, 40);
         JButton bClear = newButton("CL", 180, 100, 60, 40);
         JButton bClearHistory = newButton("Clear History", 380, 300, 200, 40);
         JButton bAdd = newButton("+", 250, 300, 100, 40);
@@ -137,7 +136,6 @@ public class GFrame extends JFrame {
         this.add(bEight);
         this.add(bNine);
         this.add(tf);
-        this.add(tHist);
         this.setSize(600, 400);
         this.setLayout(null);
         this.setVisible(true);
@@ -157,16 +155,15 @@ public class GFrame extends JFrame {
                     p = new Parser(tf.getText());
                     String formattedResult = format.format(p.eval());
                     tf.setText(formattedResult);
+                    String formattedExpr = expression + " = " + formattedResult;
 
-                    tHist.setText("");
-                    Vector<String> s = history.getHistory();
-                    s.add(expression + " = " + formattedResult);
-                    for (int i = 0; i < s.size(); i++) {
-                        // tHist.setText(new String(s.get(i).concat(tHist.getText())).concat("\n"));
-                        tHist.append(s.get(i));
-                        tHist.append("\n");
+                    // Dont add to history if its already present in histList
+                    for (int i = 0; i < histList.size(); i++) {
+                        if (histList.get(i).equals(formattedExpr)) {
+                            return;
+                        }
                     }
-
+                    histList.addElement(formattedExpr);
                 } else {
                     tf.setText("No input");
                 }
@@ -201,8 +198,7 @@ public class GFrame extends JFrame {
 
         bClearHistory.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                history.clearHistory();
-                tHist.setText("");
+                histList.clear();
             }
         });
 
@@ -210,6 +206,26 @@ public class GFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String text = tf.getText();
                 tf.setText(text.substring(0, text.length() - 1));
+            }
+        });
+
+        lHist.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    // Double-click detected
+                    int index = list.locationToIndex(evt.getPoint());
+                    String expr = histList.get(index);
+                    StringBuilder str = new StringBuilder("");
+                    int endIndex = 0;
+                    for (int i = 0; i < expr.length(); i++) {
+                        if (expr.charAt(i) == '=') {
+                            break;
+                        }
+                        endIndex++;
+                    }
+                    tf.setText(expr.substring(0, endIndex));
+                }
             }
         });
 
