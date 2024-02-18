@@ -76,6 +76,7 @@ public class GFrame extends JFrame {
         tf.setBounds(40, 50, 240, 40);
         tf.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
         tf.setBorder(new RoundBtn(5));
+        tf.setCaretColor(Color.decode("#e5e5e5"));
 
         // History
         DefaultListModel<String> histList = new DefaultListModel<>();
@@ -95,7 +96,7 @@ public class GFrame extends JFrame {
         JButton bAdd = newButton("+", 250, 300, 100, 40);
         JButton bSub = newButton("-", 250, 250, 100, 40);
         JButton bMul = newButton("x", 250, 200, 100, 40);
-        JButton bDiv = newButton("%", 250, 150, 100, 40);
+        JButton bDiv = newButton("÷", 250, 150, 100, 40);
         JButton bCut = newButton("", 180, 300, 60, 40);
         bCut.setFont(new Font("JetBrainsMono Nerd Font", Font.PLAIN, 20));
         JButton bRightPar = newButton(")", 110, 100, 60, 40);
@@ -140,11 +141,11 @@ public class GFrame extends JFrame {
         this.setLayout(null);
         this.setVisible(true);
 
-        JLabel label = new JLabel("Enter Expression: ");
-        label.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
-        label.setBounds(40, 20, 150, 40);
-        label.setForeground(Color.decode("#e5e5e5"));
-        this.add(label);
+        // JLabel label = new JLabel("Enter Expression: ");
+        // label.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
+        // label.setBounds(40, 20, 150, 40);
+        // label.setForeground(Color.decode("#e5e5e5"));
+        // this.add(label);
 
         // ActionsListeners
         bEval.addActionListener(new ActionListener() {
