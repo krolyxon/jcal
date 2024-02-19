@@ -1,10 +1,10 @@
 #!/bin/sh
 
 if [[ $* = "-u" ]] then
-    echo "Uninstalling JavaCalc"
-    echo "removing: /usr/bin/JavaCalc"
+    echo "Uninstalling jcal"
+    echo "removing: /usr/bin/jcal.jar"
     echo "removing: /usr/bin/jcal"
-    sudo rm  /usr/bin/JavaCalc.jar /usr/bin/jcal
+    sudo rm  /usr/bin/jcal.jar /usr/bin/jcal
 else
     ./build.sh
     sudo cp ./release/*.jar /usr/bin/

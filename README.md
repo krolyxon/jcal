@@ -16,7 +16,7 @@ or go to latest [releases](https://github.com/krolyxon/jcal/releases) and get th
   $ ./install.sh -u
 ```
 
-## JavaCalc in action
+## jcal in action
 ![](https://raw.githubusercontent.com/krolyxon/jcal/master/assets/screenshot1.png)
 
 ## License
