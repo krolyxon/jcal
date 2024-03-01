@@ -46,10 +46,11 @@ public class GFrame extends JFrame {
         // b.setBackground(Color.decode("#F78361"));
         b.setBackground(Color.decode("#2B2B2B"));
         b.setForeground(Color.decode("#e5e5e5"));
-        b.setFont((new Font("Times New Roman", Font.PLAIN, 20)));
+        b.setFont((new Font("Times New Roman", 1, 20)));
         b.setBounds(d1, d2, d3, d4);
         b.setBorder(new RoundBtn(15));
         b.setText(text);
+        b.setBorderPainted(false);
         return b;
     }
 
@@ -85,13 +86,17 @@ public class GFrame extends JFrame {
         lHist.setForeground(Color.decode("#e5e5e5"));
         lHist.setBounds(380, 50, 200, 240);
         lHist.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-        lHist.setBorder(new RoundBtn(5));
+        lHist.setSelectionBackground(Color.decode("#FEA00B"));
+        lHist.setSelectionForeground(Color.decode("#111111"));
+        // lHist.setBorder(new RoundBtn(0));
         this.add(lHist);
 
         // Buttons
         JButton bEval = newButton("=", 290, 50, 60, 40);
         JButton bExp = newButton("^", 250, 100, 100, 40);
-        JButton bClear = newButton("CL", 180, 100, 60, 40);
+        JButton bClear = newButton("AC", 180, 100, 60, 40);
+        bClear.setBackground(Color.decode("#FEA00B"));
+        bClear.setForeground(Color.decode("#111111"));
         JButton bClearHistory = newButton("Clear History", 380, 300, 200, 40);
         JButton bAdd = newButton("+", 250, 300, 100, 40);
         JButton bSub = newButton("-", 250, 250, 100, 40);
