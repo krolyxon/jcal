@@ -54,6 +54,19 @@ public class GFrame extends JFrame {
         return b;
     }
 
+private JButton newButtonWhite(String text, int d1, int d2, int d3, int d4) {
+        JButton b = new JButton();
+        // b.setBackground(Color.decode("#F78361"));
+        b.setBackground(Color.decode("#e5e5e5"));
+        b.setForeground(Color.decode("#131313"));
+        b.setFont((new Font("Times New Roman", Font.BOLD, 20)));
+        b.setBounds(d1, d2, d3, d4);
+        b.setBorder(new RoundBtn(15));
+        b.setText(text);
+        b.setBorderPainted(false);
+        return b;
+    }
+
     private void actionAdderForTextField(JButton b, String val) {
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -92,16 +105,16 @@ public class GFrame extends JFrame {
         this.add(lHist);
 
         // Buttons
-        JButton bEval = newButton("=", 290, 50, 60, 40);
-        JButton bExp = newButton("^", 250, 100, 100, 40);
+        JButton bEval = newButtonWhite("=", 290, 50, 60, 40);
+        JButton bExp = newButtonWhite("^", 250, 100, 100, 40);
         JButton bClear = newButton("AC", 180, 100, 60, 40);
         bClear.setBackground(Color.decode("#FEA00B"));
         bClear.setForeground(Color.decode("#111111"));
         JButton bClearHistory = newButton("Clear History", 380, 300, 200, 40);
-        JButton bAdd = newButton("+", 250, 300, 100, 40);
-        JButton bSub = newButton("-", 250, 250, 100, 40);
-        JButton bMul = newButton("x", 250, 200, 100, 40);
-        JButton bDiv = newButton("÷", 250, 150, 100, 40);
+        JButton bAdd = newButtonWhite("+", 250, 300, 100, 40);
+        JButton bSub = newButtonWhite("-", 250, 250, 100, 40);
+        JButton bMul = newButtonWhite("x", 250, 200, 100, 40);
+        JButton bDiv = newButtonWhite("÷", 250, 150, 100, 40);
         JButton bCut = newButton("", 180, 300, 60, 40);
         bCut.setFont(new Font("JetBrainsMono Nerd Font", Font.PLAIN, 20));
         JButton bRightPar = newButton(")", 110, 100, 60, 40);
@@ -155,13 +168,15 @@ public class GFrame extends JFrame {
         // ActionsListeners
         bEval.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (tf.getText().length() != 0) {
-                    String expression = tf.getText();
+                String expr = tf.getText();
+                if (expr.length() == 0 || expr.equalsIgnoreCase("No input")) {
+                    tf.setText("No input");
+                } else {
                     DecimalFormat format = new DecimalFormat();
                     p = new Parser(tf.getText());
                     String formattedResult = format.format(p.eval());
                     tf.setText(formattedResult);
-                    String formattedExpr = expression + " = " + formattedResult;
+                    String formattedExpr = expr + " = " + formattedResult;
 
                     // Dont add to history if its already present in histList
                     for (int i = 0; i < histList.size(); i++) {
@@ -170,8 +185,6 @@ public class GFrame extends JFrame {
                         }
                     }
                     histList.addElement(formattedExpr);
-                } else {
-                    tf.setText("No input");
                 }
             }
         });
